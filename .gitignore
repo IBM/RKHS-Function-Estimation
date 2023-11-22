@@ -1,5 +1,6 @@
 # data/ folder to be ignored on open-source branch
-data/
+data/*
+!data/readme_output.PNG
 
 # Config files
 .idea/

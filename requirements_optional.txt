@@ -1,6 +1,9 @@
 # If manual install via conda: > conda install -c conda-forge matplotlib
 matplotlib
 
+# For the VAR models and cross validation
+scikit-learn
+
 # Some of the examples make use to speed up frequently occuring kernel 
 # evaluations
 numba>=0.55.1
@@ -12,4 +15,4 @@ numba>=0.55.1
 #
 # For instance via pip:
 # > pip install cupy-cuda117
-cupy
+# cupy
