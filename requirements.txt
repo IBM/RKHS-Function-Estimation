@@ -1,5 +1,5 @@
 # Manually generated and hence likely incomplete
-numpy>=1.2.1
+numpy>=1.2.1,<1.25
 
 # If manual install via conda: > conda install -c conda-forge scipy
 scipy

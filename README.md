@@ -124,6 +124,56 @@ pytest
 You might have to deactivate and reactivate the virtual environment in order for `pytest`
 to work properly.
 
+## Notes
+### Compatible Package Versions
+With `numpy` Version 1.25 and above, the tests start failing with `ImportError`s within the `numpy` source code.
+As a workaround, `numpy<1.25` was added to `requirements.txt`. Here are the exact versions of package that will work:
+
+Package | Version 
+---|--- |         
+bzip2|1.0.8 | 
+ca-certificates|2023.11.17 | 
+contourpy|1.2.0 | 
+cycler|0.12.1 | 
+exceptiongroup|1.2.0 | 
+fonttools|4.45.1 | 
+importlib-resources|6.1.1 | 
+iniconfig|2.0.0 | 
+joblib|1.3.2 | 
+kiwisolver|1.4.5 | 
+libffi|3.4.4 | 
+libsqlite|3.44.1 | 
+libzlib|1.2.13 | 
+llvmlite|0.41.1 | 
+matplotlib|3.8.2 | 
+ncurses|6.4 | 
+numba|0.58.1 | 
+**numpy**|**1.24.4** | 
+openssl|3.1.4 | 
+packaging|23.2 | 
+pillow|10.1.0 | 
+pip|23.3.1 | 
+pluggy|1.3.0 | 
+pyparsing|3.1.1 | 
+pytest|7.4.3 | 
+**python**|**3.9.18** | 
+python-dateutil|2.8.2 | 
+readline|8.2 | 
+rkhsid|0.1 | 
+**scikit-learn**|**1.3.2** | 
+**scipy**|**1.11.4** | 
+setuptools|68.2.2 | 
+six|1.16.0 | 
+threadpoolctl|3.2.0 | 
+tk|8.6.13 | 
+tomli|2.0.1 | 
+tzdata|2023c | 
+wheel|0.41.3 | 
+xz|5.4.2 | 
+zipp|3.17.0 | 
+
+
+
 ## Code Style
 
 We're using [numpydoc docstyle](https://numpydoc.readthedocs.io/en/latest/format.html) 
