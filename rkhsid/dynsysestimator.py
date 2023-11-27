@@ -318,7 +318,6 @@ class DynamicalSystemEstimator(FunctionEstimator):
         y_train_trajectories_flat = cp.vstack(self.y_train_trajectories)
 
         self._parse_scaling(yp.shape[1], None if up is None else up.shape[1])
-        # FIXME: What about replacing yp.shape[1] with y_trajectories[0].shape[1] in the previous line?
 
         self._fit(
             X=new_ss_flat,
@@ -521,8 +520,7 @@ class DynamicalSystemEstimator(FunctionEstimator):
             exogenous_inputs = self._parse_array(exogenous_inputs, "exogenous_inputs")
             if self.exo_delays == 0:
                 warnings.warn(
-                    "[Warning] exogenous_inputs will not be used since"
-                    " self.exo_delays=0"
+                    "Exogenous_inputs will not be used since" " self.exo_delays=0"
                 )
 
         # Starts at initial conditions and then reads solution into next evaluation to obtain a full trajectory
@@ -539,7 +537,14 @@ class DynamicalSystemEstimator(FunctionEstimator):
                 if up is None
                 else min(i for i in [traj_len, len(up) + 1] if i is not None)
             )
-            # TODO: we could issue a warning here if traj_len and len(up) disagree
+            if (traj_len is not None) and (traj_len_p != traj_len):
+                warnings.warn(
+                    f"Mismatched lengths in trajectory {pp}: \n"
+                    f"requested length is {traj_len}, but provided input has only "
+                    f"{len(up)} time steps. Shortening to {len(up)}."
+                )
+            # This covers the case where trajectory is shorter than expected due to
+            # input being too short.
 
             # Pre-allocate for the trajectory
             input_for_pth_traj = cp.nan + cp.empty((traj_len_p, yp.shape[1]))

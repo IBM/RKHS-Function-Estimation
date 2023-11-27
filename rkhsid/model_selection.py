@@ -207,7 +207,8 @@ def GridSearchCV(
             'cv_scores': The cross validation score of each fold.
             'mean_score', 'median_score', 'average_score': the corresponding average scores.
             'train_indices': The indices of the training data used in each fold.
-            'coefs': Currently not used.
+            'coefs': Currently not used. For some model types, the coefficient matrices
+                        can be prohibitively big.
             }
 
     best_performance_index :
@@ -232,7 +233,7 @@ def GridSearchCV(
             y_est = estimator.fit(X[i_train, :], y[i_train, :]).predict(X[i_test, :])
             cv_scores_.append(scoring(y[i_test, :], y_est))
             cv_train_indices_.append(i_train)
-            # cv_coefs_.append( estimator.coef_ )  # TODO: Should we remove this originally commented line?
+            # cv_coefs_.append( estimator.coef_ )
 
         curr_performance = average(cv_scores_)
         if sign * curr_performance > sign * best_performance:
