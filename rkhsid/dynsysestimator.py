@@ -250,6 +250,8 @@ class DynamicalSystemEstimator(FunctionEstimator):
 
         y_trajectories = self._parse_array(y_trajectories, "y_trajectories")
 
+        self.state_dim = y_trajectories[0].shape[1]
+
         self.new_ss = [None] * len(y_trajectories)
         self.y_train_trajectories = [None] * len(y_trajectories)
 
@@ -262,12 +264,15 @@ class DynamicalSystemEstimator(FunctionEstimator):
                     " self.exo_delays=0"
                 )
             exogenous_inputs = self._parse_array(exogenous_inputs, "exogenous_inputs")
+            self.exo_input_dim = exogenous_inputs[0].shape[1]
         else:
             if self.exo_delays > 0:
                 warnings.warn(
                     f"[Warning] exo_delays={exo_delays} has no effect since"
                     " exogenous_inputs is None"
                 )
+            self.exo_input_dim = None
+            # If there's no exo input, the dimension remains undefined
 
         # Loops through the list of trajectories to create the state space for each one individually first.
         for pp, yp in enumerate(y_trajectories):
@@ -738,7 +743,8 @@ class DynamicalSystemEstimatorVAR(DynamicalSystemEstimator):
             Note the slight awkwardness due to 0-based and 1-based indexing.
 
         B : np.array
-            Array of shape (d, k, exo_delays), so that B[:, :, j] == B_{j+1}.
+            Array of shape (d, k, exo_delays), so that B[:, :, j] == B_{j+1} if there
+            was an exogenous input; else None is returned.
 
         C : np.array
             Array of shape (d,), if `fit_intercept` was True (the default).
@@ -756,6 +762,8 @@ class DynamicalSystemEstimatorVAR(DynamicalSystemEstimator):
                     (d, -1, self.exo_delays), order="F"
                 ),
                 axis=2,
-            ),
+            )
+            if self.exo_input_dim
+            else None,
             self._linmod.intercept_,
         )

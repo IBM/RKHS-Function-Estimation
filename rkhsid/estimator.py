@@ -603,7 +603,15 @@ class FunctionEstimator:
 
         Returns
         -------
-        self
+        list of numpy (or cupy) arrays :
+            The input data is -- if necessary -- reshaped to ensure that it is a lits of
+            numpy arrays of appropriate shape (or cupy, if CuPy is supported and installed)
+
+        Raises
+        ------
+        ValueError :
+            If input types or shapes are not as expected and can't be reshaped into the
+            appropriate format
         """
 
         x_ = x.copy()
