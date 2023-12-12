@@ -1,0 +1,15 @@
+# If manual install via conda: > conda install -c conda-forge matplotlib
+matplotlib
+
+# Some of the examples make use to speed up frequently occuring kernel 
+# evaluations
+numba>=0.55.1
+
+# Cupy installation depends on local HW, and it may require manual installation.
+#
+# For instance via conda:
+# > conda install -c conda-forge cupy
+#
+# For instance via pip:
+# > pip install cupy-cuda117
+cupy

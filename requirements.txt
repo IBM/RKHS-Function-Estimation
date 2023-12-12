@@ -1,0 +1,8 @@
+# Manually generated and hence likely incomplete
+numpy>=1.2.1
+
+# If manual install via conda: > conda install -c conda-forge scipy
+scipy
+    
+# Lower versions contain vulnerability
+setuptools>=65.5.1
